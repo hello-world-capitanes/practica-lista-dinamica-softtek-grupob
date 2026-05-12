@@ -5,7 +5,7 @@ import List from './Components/List/List';
 import Modal from './Components/Modal/index';
 
 function App() {
-  // Extraemos todo del hook con los nombres exactos que escribiste
+ 
   const { 
     items, 
     selectedItem, 
