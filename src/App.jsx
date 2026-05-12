@@ -5,7 +5,7 @@ import List from './Components/List/List';
 import Modal from './Components/Modal/index';
 
 function App() {
- 
+  
   const { 
     items, 
     selectedItem, 
