@@ -1,26 +1,55 @@
 import React from 'react';
 
-// Recibimos el item, y las funciones para borrar, mover y seleccionar
-function ListItem({ item, index, onRemove, onMove, onSelect }) {
+function ListItem({ item, onRemove, onMove, onSelect }) {
   return (
     <li 
-      className="list-item"
       onDoubleClick={() => onSelect(item)} 
-
-      style={{ cursor: 'pointer', padding: '10px', borderBottom: '1px solid #ccc' }}
+      style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        padding: '10px', 
+        margin: '5px 0',
+        border: '1px solid #ddd',
+        borderRadius: '4px',
+        backgroundColor: '#fff',
+        cursor: 'pointer' 
+      }}
+      title="Doble clic para ver detalles"
     >
-      <div className="item-info">
-        <strong>{item.nombre}</strong> - <span>{item.tipo}</span>
-
-        {/* Muestra el chexbox como texto o icono si existe */}
-        {item.esUrgente && <span> (Urgenteeeee)</span>}
+      <div>
+        <strong>{item.nombre}</strong> 
+        <span style={{ marginLeft: '10px', fontSize: '0.8em', color: '#666' }}>
+          ({item.tipo})
+        </span>
       </div>
 
-      <div className="item-actions">
-        {/* Botones para mover y borrar */}
-        <button onClick={(e) => { e.stopPropagation(); onMove(index, 'up'); }}>↑</button>
-        <button onClick={(e) => { e.stopPropagation(); onMove(index, 'down'); }}>↓</button>
-        <button onClick={(e) => { e.stopPropagation(); onRemove(item.id); }} style={{color: 'red'}}>Borrar</button>
+      <div style={{ display: 'flex', gap: '5px' }}>
+        <button 
+          onClick={(e) => { e.stopPropagation(); onMove(item.id, 'up'); }}
+          style={{ padding: '2px 8px', cursor: 'pointer' }}
+        >
+          ↑
+        </button>
+        <button 
+          onClick={(e) => { e.stopPropagation(); onMove(item.id, 'down'); }}
+          style={{ padding: '2px 8px', cursor: 'pointer' }}
+        >
+          ↓
+        </button>
+        <button 
+          onClick={(e) => { e.stopPropagation(); onRemove(item.id); }}
+          style={{ 
+            padding: '2px 8px', 
+            cursor: 'pointer', 
+            backgroundColor: '#ff4d4d', 
+            color: 'white', 
+            border: 'none', 
+            borderRadius: '3px' 
+          }}
+        >
+          Borrar
+        </button>
       </div>
     </li>
   );

@@ -1,11 +1,11 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
-function useItems() {
+export function useItems() {
     const [items, setItems] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
 
     function addItem(newItem) {
-        const itemConId={ ...newItem, id: Date.now() };
+        const itemConId = { ...newItem, id: Date.now() };
         setItems(prevItems => [...prevItems, itemConId]);
     }
 
@@ -17,38 +17,27 @@ function useItems() {
         setItems(prevItems => {
             const index = prevItems.findIndex(item => item.id === id);
             if (index === -1) return prevItems;
-
             const newItems = [...prevItems];
             const item = newItems.splice(index, 1)[0];
-
             if (direction === 'up' && index > 0) {
                 newItems.splice(index - 1, 0, item);
             } else if (direction === 'down' && index < prevItems.length - 1) {
                 newItems.splice(index + 1, 0, item);
+            } else {
+                newItems.splice(index, 0, item);
             }
-
             return newItems;
         });
     }
 
     function selectItem(id) {
-        const item = items.find(item => item.id === id);
+        const item = items.find(i => i.id === id);
         setSelectedItem(item);
     }
 
-    function closeModel(){
+    function closeModel() {
         setSelectedItem(null);
     }
 
-    return {
-        items,
-        selectedItem,
-        addItem,
-        deleteItem,
-        moveItem,
-        selectItem,
-        closeModel
-    };
-
-
-};
+    return { items, selectedItem, addItem, deleteItem, moveItem, selectItem, closeModel };
+}
