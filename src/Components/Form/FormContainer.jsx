@@ -4,32 +4,37 @@ import "./FormContainer.css";
 import Input from "./Input";
 import Selector from "./Selector";
 
-const FormContainer = ({ onAddItem }) => {
+function FormContainer({ onAddItem }) {
   const [formData, setFormData] = useState({
     title: "",
-    category: "Trabajo",
-    important: false,
+    category: "",
+    important: false
   });
 
   const categories = [
     "Trabajo",
     "Personal",
-    "Estudios",
-    "Compras",
+    "Estudios"
   ];
 
-  const handleChange = (field, value) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [field]: value,
-    }));
-  };
+  function handleChange(event) {
+    const { name, value, type, checked } =
+      event.target;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    setFormData({
+      ...formData,
+      [name]:
+        type === "checkbox"
+          ? checked
+          : value
+    });
+  }
 
-    if (!formData.title.trim()) {
-      alert("El título no puede estar vacío");
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (formData.title.trim() === "") {
+      alert("Introduce un título");
       return;
     }
 
@@ -37,17 +42,17 @@ const FormContainer = ({ onAddItem }) => {
       id: Date.now(),
       title: formData.title,
       category: formData.category,
-      important: formData.important,
+      important: formData.important
     };
 
     onAddItem(newItem);
 
     setFormData({
       title: "",
-      category: "Trabajo",
-      important: false,
+      category: "",
+      important: false
     });
-  };
+  }
 
   return (
     <div className="form-container">
@@ -56,45 +61,30 @@ const FormContainer = ({ onAddItem }) => {
       </h2>
 
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Título</label>
+        <Input
+          label="Título"
+          type="text"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          placeholder="Escribe algo"
+        />
 
-          <Input
-            type="text"
-            value={formData.title}
-            onChange={(e) =>
-              handleChange("title", e.target.value)
-            }
-            placeholder="Introduce un título"
-          />
-        </div>
+        <Selector
+          label="Categoría"
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          options={categories}
+        />
 
-        <div className="form-group">
-          <label>Categoría</label>
-
-          <Selector
-            options={categories}
-            value={formData.category}
-            onChange={(e) =>
-              handleChange("category", e.target.value)
-            }
-          />
-        </div>
-
-        <div className="checkbox-group">
-          <Input
-            type="checkbox"
-            checked={formData.important}
-            onChange={(e) =>
-              handleChange(
-                "important",
-                e.target.checked
-              )
-            }
-          />
-
-          <span>Importante</span>
-        </div>
+        <Input
+          label="Importante"
+          type="checkbox"
+          name="important"
+          checked={formData.important}
+          onChange={handleChange}
+        />
 
         <button
           type="submit"
@@ -105,6 +95,6 @@ const FormContainer = ({ onAddItem }) => {
       </form>
     </div>
   );
-};
+}
 
 export default FormContainer;
