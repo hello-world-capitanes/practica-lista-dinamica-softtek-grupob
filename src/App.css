@@ -1,0 +1,48 @@
+/* Contenedor principal para centrar todo */
+.app-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+/* Separador horizontal */
+hr {
+  border: 0;
+  border-top: 2px solid #eee;
+  margin: 30px 0;
+}
+
+/* Estilo para las secciones (Formulario y Lista) */
+section {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* Estilo para el detalle dentro del Modal */
+.detail-view {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-left: 4px solid #007bff;
+}
+
+.detail-view p {
+  margin: 10px 0;
+}
+
+/* Un toque de responsividad básica */
+@media (max-width: 480px) {
+  .app-container {
+    padding: 10px;
+    margin: 10px;
+  }
+}
