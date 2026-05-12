@@ -3,9 +3,9 @@ import { useItems } from './Hooks/useItems';
 import FormContainer from './Components/Form/FormContainer';
 import List from './Components/List/List';
 import Modal from './Components/Modal/index';
+import './App.css';
 
 function App() {
- 
   const { 
     items, 
     selectedItem, 
@@ -18,17 +18,15 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1>Gestión de Elementos Dinámicos</h1>
+      <h1> Mi Lista Dinámica</h1>
 
-      {/* Formulario para añadir items */}
-      <section>
+      <section className="form-section">
         <FormContainer onAdd={addItem} />
       </section>
 
       <hr />
 
-      {/* Lista para mostrar, mover y borrar items */}
-      <section>
+      <section className="list-section">
         <List 
           items={items} 
           onRemove={deleteItem} 
@@ -37,17 +35,16 @@ function App() {
         />
       </section>
 
-      {/* Modal que se abre cuando selectedItem no es null */}
       <Modal 
         isOpen={!!selectedItem} 
-        onClose={closeModel}
-        title="Detalles del Registro"
+        onClose={closeModel} 
+        title="Detalles del Elemento"
       >
         {selectedItem && (
-          <div className="detail-view">
+          <div className="info-detail">
             <p><strong>Nombre:</strong> {selectedItem.nombre}</p>
-            <p><strong>Tipo:</strong> {selectedItem.tipo}</p>
-            <p><strong>Prioridad:</strong> {selectedItem.esUrgente ? "⚠️ Urgente" : "Normal"}</p>
+            <p><strong>Categoría:</strong> {selectedItem.tipo}</p>
+            <p><strong>ID Técnico:</strong> {selectedItem.id}</p>
           </div>
         )}
       </Modal>
