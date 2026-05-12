@@ -17,14 +17,13 @@ function App() {
     <div className="app-container">
       <h1>Gestión de Elementos Dinámicos</h1>
 
-      {/*Formulario (Integrante 2) */}
+     
       <section>
         <FormContainer onAdd={addItem} />
       </section>
 
       <hr />
 
-      {/*Lista (Integrante 3) */}
       <section>
         <List 
           items={items} 
@@ -34,7 +33,7 @@ function App() {
         />
       </section>
 
-      {/*nEl Modal (Integrante 1/3) */}
+      
       <Modal 
         isOpen={!!selectedItem} 
         onClose={() => setSelectedItem(null)}
