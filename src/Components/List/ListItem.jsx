@@ -29,13 +29,13 @@ function ListItem({ item, onRemove, onMove, onSelect }) {
           onClick={(e) => { e.stopPropagation(); onMove(item.id, 'up'); }}
           style={{ padding: '2px 8px', cursor: 'pointer' }}
         >
-          ↑
+          up
         </button>
         <button 
           onClick={(e) => { e.stopPropagation(); onMove(item.id, 'down'); }}
           style={{ padding: '2px 8px', cursor: 'pointer' }}
         >
-          ↓
+          down
         </button>
         <button 
           onClick={(e) => { e.stopPropagation(); onRemove(item.id); }}
